@@ -1,46 +1,286 @@
+/* website met wat NIET kan als je 3d gebruikt: https://css-tricks.com/things-watch-working-css-3d/ */
+
+/* ///////////// */
+/* MARK: Basics
+/* ///////////// */
+@font-face {
+    font-family: pixelfont;
+    src: url(/assets/fonts/pixelfont.ttf); /*https://www.dafont.com/pix32.font*/
+}
+
+:root{
+    --size: clamp(2rem, 10vw, 5rem);
+    --gap: .5rem;
+    --color-1: red;
+    --color-2: orange;
+    --color-3: green;
+    --color-4: blue;
+    --color-5: white;
+    --color-6: yellow;
+    --background: rgb(244, 134, 200);
+}
+
 body{
-    display: grid;
-    place-items: center;
-    gap: 10rem;
-    cube {
+    background-color: var(--background);
+    main{
+        perspective: 25em;
+        height: 100vh;
         display: grid;
-        aspect-ratio: 1;
-        width: 10rem;
-        /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style */
-        transform-style: preserve-3d;
-        /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
-        animation: rotate-cube 2s linear infinite;
+        justify-content: center;
     }
 }
 
+h1{
+    font-family: pixelfont, sans-serif;
+    margin-top: 2em;
+}
 
+
+rubiks{
+    display: grid;
+    place-items: center;
+    height: calc(var(--size)*3 + var(--gap)*2);
+    aspect-ratio: 1;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style */
+    transform-style: preserve-3d;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
+    animation: rotate-cube 10s linear infinite;
+    cube {
+        display: grid;
+        grid-area: 1/1;
+        aspect-ratio: 1;
+        width: var(--size);
+        transform-style: preserve-3d;
+    }
+}
+
+/* ///////////// */
+/* MARK: Positioning
+/* ///////////// */
 side {
     display: block;
     aspect-ratio: 1;
-    grid-row: 1;
-    grid-column: 1;
-    background-color: hotpink;
-    filter: contrast(calc(sibling-index() * 20%));
+    grid-area: 1/1;
     &:nth-child(1){
-        transform: rotateX(-90deg) translateZ(5rem);
+        background-color: var(--color-1);
+        transform: 
+            rotateX(-90deg) 
+            translateZ(calc(var(--size)/2));
     }
     &:nth-child(2){
-        transform: rotateX(90deg) translateZ(5rem);
+        background-color: var(--color-2);
+        transform: 
+            rotateX(90deg) 
+            translateZ(calc(var(--size)/2));
     }
     &:nth-child(3){
-        transform: rotateY(-90deg) translateZ(5rem);
+        background-color: var(--color-3);
+        transform: 
+            rotateY(-90deg) 
+            translateZ(calc(var(--size)/2));
     }
     &:nth-child(4){
-        transform: rotateY(90deg) translateZ(5rem);
+        background-color: var(--color-4);
+        transform: 
+            rotateY(90deg) 
+            translateZ(calc(var(--size)/2));
     }
     &:nth-child(5){
-        transform: rotateZ(90deg) translateZ(5rem);
+        background-color: var(--color-5);
+        transform: translateZ(calc(var(--size)/2));
     }
     &:nth-child(6){
-        transform: rotateZ(-90deg) translateZ(-5rem);
+        background-color: var(--color-6);
+        transform: translateZ(calc(var(--size)/2*-1));
     }
 }
 
+cube{
+    /* //////// */
+    /* centers */
+    /* //////// */
+
+    /* white center */
+    &:nth-child(2){
+        transform: translateZ(calc(var(--size) + var(--gap)));
+    }
+    /* yellow center */
+    &:nth-child(3){
+        transform: translateZ(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* red center */
+    &:nth-child(4){
+        transform: translateY(calc(var(--size) + var(--gap)));
+    }
+    /* orange center */
+    &:nth-child(5){
+        transform: translateY(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* blue center */
+    &:nth-child(6){
+        transform: translateX(calc(var(--size) + var(--gap)));
+    }
+    /* green center */
+    &:nth-child(7){
+        transform: translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+
+
+
+    /* //////// */
+    /* White sides */
+    /* //////// */
+    /* white blue */
+    &:nth-child(8){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* white green */
+    &:nth-child(9){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* white red */
+    &:nth-child(10){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size) + var(--gap)));
+    }
+    /* white orange */
+    &:nth-child(11){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)));
+    }
+
+
+
+    /* //////// */
+    /* Yellow sides */
+    /* //////// */
+    /* yellow blue */
+    &:nth-child(12){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* yellow green */
+    &:nth-child(13){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* yellow red */
+    &:nth-child(14){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size) + var(--gap)));
+    }
+    /* yellow orange */
+    &:nth-child(15){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)));
+    }
+
+
+    /* //////// */
+    /* other sides */
+    /* //////// */
+    /* red blue */
+    &:nth-child(16){
+        transform: 
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* orange blue */
+    &:nth-child(17){
+        transform: 
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* red green */
+    &:nth-child(18){
+        transform: 
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* orange green */
+    &:nth-child(19){
+        transform: 
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+
+
+
+    /* //////// */
+    /* white corners */
+    /* //////// */
+
+    /* white red blue */
+    &:nth-child(20){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* white red green */
+    &:nth-child(21){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* white orange blue */
+    &:nth-child(22){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* white orange green */
+    &:nth-child(23){
+        transform: 
+            translateZ(calc(var(--size) + var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+
+    /* //////// */
+    /* yellow corners */
+    /* //////// */
+    /* yellow red blue */
+    &:nth-child(24){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* yellow red green */
+    &:nth-child(25){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size) + var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+    /* yellow orange blue */
+    &:nth-child(26){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size) + var(--gap)));
+    }
+    /* yellow orange green */
+    &:nth-child(27){
+        transform: 
+            translateZ(calc(var(--size)*-1 - var(--gap)))
+            translateY(calc(var(--size)*-1 - var(--gap)))
+            translateX(calc(var(--size)*-1 - var(--gap)));
+    }
+}
 
 
 
