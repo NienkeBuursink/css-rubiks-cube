@@ -20,20 +20,34 @@
     --background: rgb(244, 134, 200);
 }
 
+
 body{
+    position: relative;
     background-color: var(--background);
+    header{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        label, input{
+            z-index: 10;
+            cursor: pointer;
+        }
+    }
     main{
-        perspective: 25em;
+        perspective: 40em;
         height: 100vh;
         display: grid;
         justify-content: center;
+        h1{
+            font-family: pixelfont, sans-serif;
+            margin-top: 2em;
+            justify-self: center;
+        }
     }
 }
 
-h1{
-    font-family: pixelfont, sans-serif;
-    margin-top: 2em;
-}
+
+
 
 
 rubiks{
@@ -44,7 +58,8 @@ rubiks{
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style */
     transform-style: preserve-3d;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
-    animation: rotate-cube 10s linear infinite;
+    transform: rotate3d(1, 1, 1, 45deg);
+    /* animation: rotate-cube 10s linear infinite; */
     cube {
         display: grid;
         grid-area: 1/1;
@@ -52,6 +67,30 @@ rubiks{
         width: var(--size);
         transform-style: preserve-3d;
     }
+}
+
+@keyframes rotate-cube{
+    from{
+        transform: rotate3d(0, 0, 0, 0);
+    }
+    to{
+        transform: rotate3d(1, 3, 2, 360deg);
+    }
+}
+
+
+
+/* ///////////// */
+/* MARK: Themes
+/* ///////////// */
+:root:has([name="transparent-mode"]:checked){
+    --color-1: rgba(255, 0, 0, 0.5);
+    --color-2: rgba(255, 166, 0, 0.5);
+    --color-3: rgba(0, 128, 0, 0.5);
+    --color-4: rgba(0, 0, 255, 0.5);
+    --color-5: rgba(255, 255, 255, 0.5);
+    --color-6: rgba(255, 255, 0, 0.5);
+    --background: rgb(244, 134, 200);
 }
 
 /* ///////////// */
@@ -282,16 +321,16 @@ cube{
     }
 }
 
+/* /////// */
+/* MARK: Rotations
+/* /////// */
 
-
-
-
-
-@keyframes rotate-cube{
-    from{
-        transform: rotate3d(0, 0, 0, 0);
+/* rubiks:hover{
+    cube{
+        &:nth-child(2){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap))),
+                rotate3d(1,0,0,0);
+        }
     }
-    to{
-        transform: rotate3d(1, 3, 2, 360deg);
-    }
-}
+} */
