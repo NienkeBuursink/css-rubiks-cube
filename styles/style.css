@@ -11,12 +11,12 @@
 :root{
     --size: clamp(2rem, 10vw, 5rem);
     --gap: .5rem;
-    --color-1: red;
-    --color-2: orange;
-    --color-3: green;
-    --color-4: blue;
-    --color-5: white;
-    --color-6: yellow;
+    --color-1: rgba(255, 0, 0, 0.5);
+    --color-2: rgba(255, 166, 0, 0.5);
+    --color-3: rgba(0, 128, 0, 0.5);
+    --color-4: rgba(0, 0, 255, 0.5);
+    --color-5: rgba(255, 255, 255, 0.5);
+    --color-6: rgba(255, 255, 0, 0.5);
     --background: rgb(244, 134, 200);
 }
 
@@ -33,6 +33,7 @@ body{
 h1{
     font-family: pixelfont, sans-serif;
     margin-top: 2em;
+    place-self: center;
 }
 
 
@@ -45,12 +46,22 @@ rubiks{
     transform-style: preserve-3d;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
     animation: rotate-cube 10s linear infinite;
+    /* transform: rotate3d(1, 3, 2, 60deg); */
     cube {
         display: grid;
         grid-area: 1/1;
         aspect-ratio: 1;
         width: var(--size);
         transform-style: preserve-3d;
+    }
+}
+
+@keyframes rotate-cube{
+    from{
+        transform: rotate3d(0, 0, 0, 0);
+    }
+    to{
+        transform: rotate3d(1, 3, 2, 360deg);
     }
 }
 
@@ -96,189 +107,23 @@ side {
 }
 
 cube{
+    transform:
+        rotateX(var(--rx, 0deg))
+        rotateY(var(--ry, 0deg))
+        translateZ(var(--size));
     /* //////// */
-    /* centers */
+    /* white */
     /* //////// */
-
+        
     /* white center */
-    &:nth-child(2){
-        transform: translateZ(calc(var(--size) + var(--gap)));
+    &:nth-child(2) {
+        --ry:90deg;
     }
-    /* yellow center */
-    &:nth-child(3){
-        transform: translateZ(calc(var(--size)*-1 - var(--gap)));
+    &:nth-child(3) {
+        --ry:180deg;
     }
-    /* red center */
-    &:nth-child(4){
-        transform: translateY(calc(var(--size) + var(--gap)));
-    }
-    /* orange center */
-    &:nth-child(5){
-        transform: translateY(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* blue center */
-    &:nth-child(6){
-        transform: translateX(calc(var(--size) + var(--gap)));
-    }
-    /* green center */
-    &:nth-child(7){
-        transform: translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-
-
-
-    /* //////// */
-    /* White sides */
-    /* //////// */
-    /* white blue */
-    &:nth-child(8){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* white green */
-    &:nth-child(9){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* white red */
-    &:nth-child(10){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size) + var(--gap)));
-    }
-    /* white orange */
-    &:nth-child(11){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)));
-    }
-
-
-
-    /* //////// */
-    /* Yellow sides */
-    /* //////// */
-    /* yellow blue */
-    &:nth-child(12){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* yellow green */
-    &:nth-child(13){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* yellow red */
-    &:nth-child(14){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size) + var(--gap)));
-    }
-    /* yellow orange */
-    &:nth-child(15){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)));
-    }
-
-
-    /* //////// */
-    /* other sides */
-    /* //////// */
-    /* red blue */
-    &:nth-child(16){
-        transform: 
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* orange blue */
-    &:nth-child(17){
-        transform: 
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* red green */
-    &:nth-child(18){
-        transform: 
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* orange green */
-    &:nth-child(19){
-        transform: 
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-
-
-
-    /* //////// */
-    /* white corners */
-    /* //////// */
-
-    /* white red blue */
-    &:nth-child(20){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* white red green */
-    &:nth-child(21){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* white orange blue */
-    &:nth-child(22){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* white orange green */
-    &:nth-child(23){
-        transform: 
-            translateZ(calc(var(--size) + var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-
-    /* //////// */
-    /* yellow corners */
-    /* //////// */
-    /* yellow red blue */
-    &:nth-child(24){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* yellow red green */
-    &:nth-child(25){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size) + var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
-    }
-    /* yellow orange blue */
-    &:nth-child(26){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size) + var(--gap)));
-    }
-    /* yellow orange green */
-    &:nth-child(27){
-        transform: 
-            translateZ(calc(var(--size)*-1 - var(--gap)))
-            translateY(calc(var(--size)*-1 - var(--gap)))
-            translateX(calc(var(--size)*-1 - var(--gap)));
+    &:nth-child(4) {
+        --ry:270deg;
     }
 }
 
@@ -287,11 +132,193 @@ cube{
 
 
 
-@keyframes rotate-cube{
-    from{
-        transform: rotate3d(0, 0, 0, 0);
+
+@media DISABLED {
+    cube{
+        /* //////// */
+        /* centers*/
+        /* //////// */
+        
+        /* white center */
+        &:nth-child(2){
+            transform: translateZ(calc(var(--size) + var(--gap)));
+        }
+        /* yellow center */
+        &:nth-child(3){
+            transform: translateZ(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* red center */
+        &:nth-child(4){
+            transform: translateY(calc(var(--size) + var(--gap)));
+        }
+        /* orange center */
+        &:nth-child(5){
+            transform: translateY(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* blue center */
+        &:nth-child(6){
+            transform: translateX(calc(var(--size) + var(--gap)));
+        }
+        /* green center */
+        &:nth-child(7){
+            transform: translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+
+
+
+        /* //////// */
+        /* White sides */
+        /* //////// */
+        /* white blue */
+        &:nth-child(8){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* white green */
+        &:nth-child(9){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* white red */
+        &:nth-child(10){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size) + var(--gap)));
+        }
+        /* white orange */
+        &:nth-child(11){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)));
+        }
+
+
+
+        /* //////// */
+        /* Yellow sides */
+        /* //////// */
+        /* yellow blue */
+        &:nth-child(12){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* yellow green */
+        &:nth-child(13){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* yellow red */
+        &:nth-child(14){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size) + var(--gap)));
+        }
+        /* yellow orange */
+        &:nth-child(15){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)));
+        }
+
+
+        /* //////// */
+        /* other sides */
+        /* //////// */
+        /* red blue */
+        &:nth-child(16){
+            transform: 
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* orange blue */
+        &:nth-child(17){
+            transform: 
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* red green */
+        &:nth-child(18){
+            transform: 
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* orange green */
+        &:nth-child(19){
+            transform: 
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+
+
+
+        /* //////// */
+        /* white corners */
+        /* //////// */
+
+        /* white red blue */
+        &:nth-child(20){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* white red green */
+        &:nth-child(21){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* white orange blue */
+        &:nth-child(22){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* white orange green */
+        &:nth-child(23){
+            transform: 
+                translateZ(calc(var(--size) + var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+
+        /* //////// */
+        /* yellow corners */
+        /* //////// */
+        /* yellow red blue */
+        &:nth-child(24){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* yellow red green */
+        &:nth-child(25){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size) + var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
+        /* yellow orange blue */
+        &:nth-child(26){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size) + var(--gap)));
+        }
+        /* yellow orange green */
+        &:nth-child(27){
+            transform: 
+                translateZ(calc(var(--size)*-1 - var(--gap)))
+                translateY(calc(var(--size)*-1 - var(--gap)))
+                translateX(calc(var(--size)*-1 - var(--gap)));
+        }
     }
-    to{
-        transform: rotate3d(1, 3, 2, 360deg);
-    }
+
 }
