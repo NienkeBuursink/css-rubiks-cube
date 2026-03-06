@@ -9,7 +9,7 @@
 }
 
 :root{
-    --size: clamp(2rem, 10vw, 5rem);
+    --size: clamp(2rem, 8vw, 4rem);
     --gap: .5rem;
     --color-1: red;
     --color-2: orange;
@@ -135,10 +135,7 @@ cube{
         rotateZ(var(--rz, 0deg))
         translateX(var(--tx, 0))
         translateY(var(--ty, 0))
-        translateZ(var(--tz, 0))
-        rotateZ(var(--rz-self, 0deg))
-        rotateY(var(--ry-self, 0deg))
-        rotateX(var(--rx-self, 0deg));
+        translateZ(var(--tz, 0));
     transition: all 1s;
 
     /* White face */
@@ -260,18 +257,37 @@ cube{
 
 
 /* ///////////// */
-/* MARK: Theme
+/* MARK: Themes
 /* ///////////// */
-:root:has([name="transparent-mode"]:checked){
-    --color-1: rgba(255, 0, 0, 0.5);
-    --color-2: rgba(255, 166, 0, 0.5);
-    --color-3: rgba(0, 128, 0, 0.5);
-    --color-4: rgba(0, 0, 255, 0.5);
-    --color-5: rgba(255, 255, 255, 0.5);
-    --color-6: rgba(255, 255, 0, 0.5);
-    --border: transparent;
+:root{
+    --theme: normal;
 }
+
+:root:has([name="transparent-mode"]:checked){
+    --theme: transparent;
+}
+
 :root:has([name="transformer-mode"]:checked){
+    --theme: transformer;
+}
+
+:root:has([name="transformer-mode"]:checked) and :has([name="transparent-mode"]:checked){
+    --theme: transparent-transformer;
+}
+
+@container style(--theme: transparent){
+    rubiks{
+        --color-1: rgba(255, 0, 0, 0.5);
+        --color-2: rgba(255, 166, 0, 0.5);
+        --color-3: rgba(0, 128, 0, 0.5);
+        --color-4: rgba(0, 0, 255, 0.5);
+        --color-5: rgba(255, 255, 255, 0.5);
+        --color-6: rgba(255, 255, 0, 0.5);
+        --border: transparent;
+    }
+}
+
+@container style(--theme: transformer){
     cube{
         /* hoofd */
         &:nth-child(11){
@@ -343,12 +359,96 @@ cube{
 /* /////////////// */
 /* :MARK: Rotations
 /* //////////// */
+@property --rx {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
 
-rubiks:hover{
+@property --ry {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --rz {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+rubiks:hover cube{
+    --start-y: 0deg;
+    --end-y: 0deg;
+    --start-x: 0deg;
+    --end-x: 0deg;
+    --start-z: 0deg;
+    --end-z: 0deg;
+}
+    
+
+rubiks:hover {
     cube{
-        /* first rotate */
-        &:nth-child(-n+9){
-            --rz: 90deg
+        &:nth-child(-n+6) {
+            animation: step1 .5s linear forwards;
         }
+    }     
+    cube:nth-child(n+7):nth-child(-n+9){
+        animation: step1and2 1s linear forwards;
+    }
+    cube:nth-child(3n+10){
+        animation: step2 .5s linear forwards;
+        animation-delay: .5s;
     }
 }
+
+/* @keyframes steps {
+    from{
+        --rx: var(--start-x, 0deg);
+        --ry: var(--start-y, 0deg);
+        --rz: var(--start-z, 0deg);
+    }
+    to{
+        --rx: var(--end-x, 0deg);
+        --ry: var(--end-y, 0deg);
+        --rz: var(--end-z, 0deg);
+    }
+} */
+
+@keyframes step1 {
+    from{
+        --rz: 0deg;
+    }
+    to{
+        --rz: 90deg;
+    }
+}
+
+@keyframes step1and2 {
+    0% {
+     --rz: 0deg;   --rx: 0deg; 
+    }
+    50% { 
+        --rz: 90deg;  --rx: 0deg; 
+    }
+    100% {
+        --rz: 90deg;  --rx: 90deg; 
+    }
+}
+
+@keyframes step2 {
+    0% {
+     --rz: 0deg;   --rx: 0deg; 
+    }
+    50% { 
+        --rz: 0deg;  --rx: 0deg; 
+    }
+    100% {
+        --rz: 0deg;  --rx: 90deg; 
+    }
+}
+
+/* transformer mode in style query */
+/* if is een style query voor maar 1 property. bijv voor light dark mode, maar dan iets anders dan kleur */
+/* leuke typografie */
+/* gezichtje kan wel geanimeerd met background image @property */
