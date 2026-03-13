@@ -5,7 +5,7 @@
 /* ///////////// */
 @font-face {
     font-family: pixelfont;
-    src: url(/assets/fonts/pixelfont.ttf); /*https://www.dafont.com/pix32.font*/
+    src: url(../assets/fonts/pixelfont.ttf); /*https://www.dafont.com/pix32.font*/
 }
 
 :root{
