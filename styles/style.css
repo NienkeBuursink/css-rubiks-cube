@@ -48,7 +48,7 @@ body{
             font-family: pixelfont, sans-serif;
             font-size: calc(var(--size)*3);
             place-self: center;
-            color: black;
+            text-transform: uppercase;
             mix-blend-mode: difference;
         }
     }
@@ -356,7 +356,7 @@ cube{
                 position: absolute;
                 content: "🧠";
                 place-self: center;
-                scale: 3;
+                font-size: calc(var(--size)*.8);
             }
             side:nth-child(5){
                 background-image: url(../assets/images/roblox-face.png);
@@ -397,14 +397,14 @@ cube{
                 position: absolute;
                 content: "❤️";
                 place-self: center;
-                scale: 2;
+                font-size: calc(var(--size)*.5);
                 transform: translateZ(calc(var(--size)/2));
             }
             &::after{
                 position: absolute;
                 content: "🫁";
                 place-self: center;
-                scale: 5;
+                font-size: calc(var(--size)*2);
             }
         }
 
