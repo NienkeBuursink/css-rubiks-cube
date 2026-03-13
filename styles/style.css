@@ -359,7 +359,7 @@ cube{
                 scale: 3;
             }
             side:nth-child(5){
-                background-image: url(/assets/images/roblox-face.webp);
+                background-image: url(/assets/images/roblox-face.png);
                 background-position: center;
                 background-size: contain;
             }
