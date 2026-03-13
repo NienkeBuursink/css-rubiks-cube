@@ -347,9 +347,6 @@ cube{
 }
 
 @container style(--theme: transformer){
-    rubiks:hover{
-        animation: transformer-ded 3s linear forwards;
-    }
     cube{
         /* hoofd */
         &:nth-child(11){
