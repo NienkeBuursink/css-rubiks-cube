@@ -32,17 +32,24 @@ body{
         label, input{
             z-index: 10;
             cursor: pointer;
+            font-family: pixelfont, sans-serif;
+            font-size: 1.5em;
         }
     }
     main{
-        perspective: 20em;
+        position: relative;
+        perspective: 25em;
         height: 100vh;
         display: grid;
-        justify-content: center;
+        place-content: center;
+        isolation: isolate;
         h1{
+            position: absolute;
             font-family: pixelfont, sans-serif;
-            margin-top: 2em;
-            justify-self: center;
+            font-size: calc(var(--size)*3);
+            place-self: center;
+            color: black;
+            mix-blend-mode: difference;
         }
     }
 }
@@ -59,7 +66,7 @@ rubiks{
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style */
     transform-style: preserve-3d;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
-    /* transform: rotate3d(1, 1, 1, 45deg); */
+    /* transform: rotate3d(10, 10, 1, -40deg); */
     animation: rotate-cube 10s linear infinite;
     cube {
         display: grid;
@@ -133,9 +140,75 @@ cube{
         rotateX(var(--rx, 0deg))
         rotateY(var(--ry, 0deg))
         rotateZ(var(--rz, 0deg))
+
+        rotateX(var(--rx1, 0deg))
+        rotateY(var(--ry1, 0deg))
+        rotateZ(var(--rz1, 0deg))
+
+        rotateX(var(--rx2, 0deg))
+        rotateY(var(--ry2, 0deg))
+        rotateZ(var(--rz2, 0deg))
+
+        rotateX(var(--rx3, 0deg))
+        rotateY(var(--ry3, 0deg))
+        rotateZ(var(--rz3, 0deg))
+
+        rotateX(var(--rx4, 0deg))
+        rotateY(var(--ry4, 0deg))
+        rotateZ(var(--rz4, 0deg))
+
+        rotateX(var(--rx5, 0deg))
+        rotateY(var(--ry5, 0deg))
+        rotateZ(var(--rz5, 0deg))
+
+        rotateX(var(--rx6, 0deg))
+        rotateY(var(--ry6, 0deg))
+        rotateZ(var(--rz6, 0deg))
+
+        rotateX(var(--rx7, 0deg))
+        rotateY(var(--ry7, 0deg))
+        rotateZ(var(--rz7, 0deg))
+
+        rotateX(var(--rx8, 0deg))
+        rotateY(var(--ry8, 0deg))
+        rotateZ(var(--rz8, 0deg))
+
+        rotateX(var(--rx9, 0deg))
+        rotateY(var(--ry9, 0deg))
+        rotateZ(var(--rz9, 0deg))
+
+        rotateX(var(--rx10, 0deg))
+        rotateY(var(--ry10, 0deg))
+        rotateZ(var(--rz10, 0deg))
+
+        rotateX(var(--rx11, 0deg))
+        rotateY(var(--ry11, 0deg))
+        rotateZ(var(--rz11, 0deg))
+
+        rotateX(var(--rx12, 0deg))
+        rotateY(var(--ry12, 0deg))
+        rotateZ(var(--rz12, 0deg))
+
+        rotateX(var(--rx13, 0deg))
+        rotateY(var(--ry13, 0deg))
+        rotateZ(var(--rz13, 0deg))
+
+        rotateX(var(--rx14, 0deg))
+        rotateY(var(--ry14, 0deg))
+        rotateZ(var(--rz14, 0deg))
+
+        rotateX(var(--rx15, 0deg))
+        rotateY(var(--ry15, 0deg))
+        rotateZ(var(--rz15, 0deg))
+
+        rotateX(var(--rx16, 0deg))
+        rotateY(var(--ry16, 0deg))
+        rotateZ(var(--rz16, 0deg))
+
         translateX(var(--tx, 0))
         translateY(var(--ty, 0))
         translateZ(var(--tz, 0));
+
     transition: all 1s;
 
     /* White face */
@@ -259,32 +332,18 @@ cube{
 /* ///////////// */
 /* MARK: Themes
 /* ///////////// */
-:root{
-    --theme: normal;
-}
-
 :root:has([name="transparent-mode"]:checked){
-    --theme: transparent;
+    --color-1: rgba(255, 0, 0, 0.3);
+    --color-2: rgba(255, 166, 0, 0.3);
+    --color-3: rgba(0, 128, 0, 0.3);
+    --color-4: rgba(0, 0, 255, 0.3);
+    --color-5: rgba(255, 255, 255, 0.3);
+    --color-6: rgba(255, 255, 0, 0.3);
+    --border: transparent;
 }
 
 :root:has([name="transformer-mode"]:checked){
     --theme: transformer;
-}
-
-:root:has([name="transformer-mode"]:checked) and :has([name="transparent-mode"]:checked){
-    --theme: transparent-transformer;
-}
-
-@container style(--theme: transparent){
-    rubiks{
-        --color-1: rgba(255, 0, 0, 0.5);
-        --color-2: rgba(255, 166, 0, 0.5);
-        --color-3: rgba(0, 128, 0, 0.5);
-        --color-4: rgba(0, 0, 255, 0.5);
-        --color-5: rgba(255, 255, 255, 0.5);
-        --color-6: rgba(255, 255, 0, 0.5);
-        --border: transparent;
-    }
 }
 
 @container style(--theme: transformer){
@@ -292,6 +351,18 @@ cube{
         /* hoofd */
         &:nth-child(11){
             --ty: calc(var(--size)*-2);
+            position: relative;
+            &::after{
+                position: absolute;
+                content: "🧠";
+                place-self: center;
+                scale: 3;
+            }
+            side:nth-child(5){
+                background-image: url(/assets/images/roblox-face.webp);
+                background-position: center;
+                background-size: contain;
+            }
         }
         /* rechterbeen */
         &:nth-child(1){
@@ -317,6 +388,24 @@ cube{
         }
         &:nth-child(9){
             --ty: calc(var(--size)*3);
+        }
+
+        /* midden */
+        &:nth-child(14){
+            position: relative;
+            &::before{
+                position: absolute;
+                content: "❤️";
+                place-self: center;
+                scale: 2;
+                transform: translateZ(calc(var(--size)/2));
+            }
+            &::after{
+                position: absolute;
+                content: "🫁";
+                place-self: center;
+                scale: 5;
+            }
         }
 
         /* rechterrarm */
@@ -356,99 +445,1548 @@ cube{
 }
 
 
+
 /* /////////////// */
 /* :MARK: Rotations
 /* //////////// */
-@property --rx {
+@property --rx1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz1 {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
-@property --ry {
+
+@property --rx2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz2 {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
-@property --rz {
+
+@property --rx3 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry3 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz3 {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
 }
 
-rubiks:hover cube{
-    --start-y: 0deg;
-    --end-y: 0deg;
-    --start-x: 0deg;
-    --end-x: 0deg;
-    --start-z: 0deg;
-    --end-z: 0deg;
+
+@property --rx4 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
+@property --ry4 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz4 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx5 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry5 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz5 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx6 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry6 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz6 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx7 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry7 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz7 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx8 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry8 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz8 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx9 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry9 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz9 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx10 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry10 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz10 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx11 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry11 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz11 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx12 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry12 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz12 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx13 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry13 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz13 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx14 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry14 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz14 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx15 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry15 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz15 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx16 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry16 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz16 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+
     
+/* poging 1 */
+@media DISABLE {
+    rubiks:hover {
+        cube{
+            animation: steps 20s linear forwards;
+            /* stap 1 */
+            &:nth-child(-n+9) {
+                --one-z: 90deg;
+                --two-z: 90deg;
+                --three-z: 90deg;
+            }
 
-rubiks:hover {
-    cube{
-        &:nth-child(-n+6) {
-            animation: step1 .5s linear forwards;
-        }
-    }     
-    cube:nth-child(n+7):nth-child(-n+9){
-        animation: step1and2 1s linear forwards;
-    }
-    cube:nth-child(3n+10){
-        animation: step2 .5s linear forwards;
-        animation-delay: .5s;
+            /* stap 2 */
+            &:nth-child(n+7):nth-child(-n+9) {
+                --two-x: -90deg;
+                --three-x: -90deg;
+            }&:nth-child(3n+10){
+                --two-x: -90deg;
+                --three-x: -90deg;
+            }
+
+            /* stap 3 */
+            &:nth-child(-n+6){
+                --three-z: 0deg;
+            }
+            &:nth-child(7){
+                --three-y: 90deg;
+                --three-x: -90deg;
+            }
+            &:nth-child(10), 
+            &:nth-child(19){
+                --three-y: 90deg;
+                --two-x: -90deg;
+                --three-x: -90deg;
+            }
+
+            /* stap 4 */
+            &:nth-child(1),
+            &:nth-child(4),
+            &:nth-child(8),
+            &:nth-child(9),
+            &:nth-child(13),
+            &:nth-child(16),
+            &:nth-child(19),
+            &:nth-child(22),
+            &:nth-child(25){
+                --four-x: 180deg;
+            }
+
+        }     
     }
 }
 
-/* @keyframes steps {
-    from{
+/* poging 2 */
+@media DISABLE {
+    rubiks:hover {
+        cube{
+            animation: steps 15s linear forwards;
+            &:nth-child(1){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+
+                /* stap 3 */
+                --three-z: 0deg;
+
+                /* stap 4 */
+                --four-x: 180deg;
+                --five-x: 180deg;
+            }
+
+            &:nth-child(2){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+
+                /* stap 3 */
+                --three-z: 0deg;
+
+                /* stap 5 */
+                --five-y: 90deg;
+            }
+
+            &:nth-child(3){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+
+                /* stap 3 */
+                --three-z: 0deg;
+
+                /* stap 5 */
+                --five-y: 90deg;
+            }
+
+            &:nth-child(4){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+
+                /* stap 3 */
+                --three-z: 0deg;
+
+                /* stap 4 */
+                --four-x: 180deg;
+                --five-x: 180deg;
+            }
+
+            &:nth-child(5){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+
+                /* stap 3 */
+                --three-z: 0deg;
+            }
+
+            &:nth-child(6){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+                
+                /* stap 3 */
+                --three-z: 0deg;
+            }
+
+            &:nth-child(7){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+                --three-z: 90deg;
+                --four-z: 90deg;
+                --five-z:90deg;
+
+                /* stap 2 */
+                --two-x: -90deg;
+
+                /* stap 3 */
+                --three-y: 90deg;
+                --four-y: 90deg;
+                --five-y: 90deg;
+                --three-x: -90deg;
+                --four-x: -90deg;
+                --five-x: -90deg;
+            }
+            &:nth-child(8){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+                --three-z: 90deg;
+                --four-z: 90deg;
+
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+
+                /* stap 5 */
+                --five-z: 0deg;
+            }
+            &:nth-child(9){
+                /* stap 1 */
+                --one-z: 90deg;
+                --two-z: 90deg;
+                --three-z: 90deg;
+                --four-z: 90deg;
+
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+
+                /* stap 5 */
+                --five-z: 0deg;
+            }
+            &:nth-child(10){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+                --four-x: -90deg;
+                --five-x: -90deg;
+
+                /* stap 3 */
+                --three-y: 90deg;
+                --four-y: 90deg;
+                --five-y: 90deg;
+            }
+            &:nth-child(11){
+                /* stap 5 */
+                --five-y: 90deg;
+            }
+            &:nth-child(12){
+                /* stap 5 */
+                --five-y: 90deg;
+            }
+            &:nth-child(13){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+            }
+            &:nth-child(15){
+
+            }
+            &:nth-child(16){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+            }
+            &:nth-child(17){
+
+            }
+            &:nth-child(18){
+                
+            }
+            &:nth-child(19){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 3 */
+                --three-y: 90deg;
+                --four-y: 90deg;
+                --five-y: 90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+
+                /* stap 5 */
+                --five-x: -180deg;
+                --five-z: 0deg;
+                --five-y: 90deg;
+            }
+            &:nth-child(20){
+                --five-y:90deg;
+            }
+            &:nth-child(21){
+                --five-y:90deg;
+            }
+            &:nth-child(22){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+            }
+            &:nth-child(23){
+
+            }
+            &:nth-child(24){
+                
+            }
+            &:nth-child(25){
+                /* stap 2 */
+                --two-x: -90deg;
+                --three-x: -90deg;
+
+                /* stap 4 */
+                --four-x: 90deg;
+                --five-x: 90deg;
+            }
+            &:nth-child(26){
+                
+            }
+            &:nth-child(27){
+
+            }
+
+        }     
+    }
+
+}
+
+rubiks:hover{
+    cube{
+        --rx:0deg; --ry:0deg; --rz:0deg;
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        animation: steps 8s linear forwards;
+        &:nth-child(1) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --four-x: 180deg;
+            --six-z: -90deg;
+            --eight-x: -90deg;
+            --eleven-z: 90deg;
+            --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(2) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --five-y: 90deg;
+            --seven-z: 90deg;
+            --eleven-z: 90deg;
+            --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(3) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --five-y: 90deg;
+            --six-x: -90deg;
+            --seven-y: -90deg;
+            --ten-x: 90deg;
+            --eleven-z: 90deg;
+            --thirteen-x: -90deg;
+            --fourteen-y: -90deg;
+            --fifteen-x: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(4) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --four-x: 180deg;
+            --six-z: -90deg;
+            --eight-x: -90deg;
+            --eleven-z: 90deg;
+            --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(5) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --thirteen-z: -90deg;
+        }
+
+        &:nth-child(6) {
+            --one-z: 90deg;
+            --three-z: -90deg;
+            --seven-x: 90deg;
+            --eight-z: 90deg;
+            --twelve-z: -90deg;
+            --fourteen-x: 90deg;
+            --sixteen-x: 180deg;
+        }
+
+        &:nth-child(7) {
+            --one-z: 90deg;
+            --two-y: 90deg;
+            --three-x: 90deg;
+            --seven-z: 90deg;
+            --eight-x: -90deg;
+            --nine-y: 90deg;
+            --ten-z: 90deg;
+            --eleven-x: -90deg;
+            --twelve-y: -90deg;
+            --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(8) {
+            --one-z: 90deg;
+            --two-y: 90deg;
+            --four-y:-180deg;
+            --five-z: -90deg;
+            --eight-z: 90deg;
+            --nine-y: 90deg;
+            --thirteen-z: -90deg;
+        }
+
+        &:nth-child(9) {
+            --one-z: 90deg;
+            --two-y: 90deg;
+            --four-y:-180deg;
+            --five-z: -90deg;
+            --seven-x: 90deg;
+            --eight-y: 90deg;
+            --eleven-z: 90deg;
+            --twelve-x: -90deg;
+            --fifteen-x: 90deg;
+            --sixteen-z: 180deg;
+        }
+
+        &:nth-child(10) {
+            --two-x: -90deg;
+            --three-y: 90deg;
+            --ten-x: -90deg;
+            --eleven-y: -90deg;
+            --thirteen-x: 90deg;
+            --fifteen-y: -90deg;
+        }
+
+        &:nth-child(11) {
+            --five-y: 90deg;
+            --eight-y: -90deg;
+            --twelve-y: 90deg;
+            --fifteen-y: -90deg;
+        }
+
+        &:nth-child(12) {
+            --five-y: 90deg;
+            --six-x: -90deg;
+            --seven-y: -90deg;
+            --ten-x: 90deg;
+        }
+
+        &:nth-child(13) {
+            --two-x: -90deg;
+            --four-x:180deg;
+            --nine-x:-90deg;
+        }
+
+        &:nth-child(15) {
+            --seven-x: 90deg;
+            --eleven-x: 90deg;
+            --fourteen-x: 90deg;
+            --sixteen-x: 180deg;
+        }
+
+        &:nth-child(16) {
+            --two-x: -90deg;
+            --four-x:180deg;
+            --nine-x:-90deg;
+            --ten-y: 90deg;
+            --thirteen-x: 90deg;
+            --fourteen-y: 90deg;
+            --fifteen-x: -90deg;
+        }
+
+        &:nth-child(17) {
+            --ten-y: 90deg;
+        }
+
+        &:nth-child(18) {
+            --seven-x: 90deg;
+            --eleven-x: 90deg;
+            --twelve-y: -90deg;
+            --fifteen-y: 90deg;
+            --sixteen-x: 180deg;
+        }
+
+        &:nth-child(19) {
+            --two-x: -90deg;
+            --three-y: 90deg;
+            --four-z: 180deg;
+            --five-x: 90deg;
+            --eight-x: -90deg;
+            --nine-z:-90deg;
+            --twelve-y: 90deg;
+            --thirteen-z: 90deg;
+            --fifteen-x: -90deg;
+        }   
+
+        &:nth-child(20) {
+            --five-y: 90deg;
+            --eight-y: -90deg;
+            --twelve-y: 90deg;
+            --fifteen-y: -90deg;
+        }
+
+        &:nth-child(21) {
+            --five-y: 90deg;
+            --six-x: -90deg;
+            --seven-y: -90deg;
+            --ten-x: 90deg;
+        }
+
+        &:nth-child(22) {
+            --two-x: -90deg;
+            --four-x: 180deg;
+            --nine-x: -90deg;
+        }
+
+        &:nth-child(23) {
+            --six-z: 90deg;
+        }
+
+        &:nth-child(24) {
+            --six-z: 90deg;
+            --ten-x: 90deg;
+        }
+
+        &:nth-child(25) {
+            --two-x: -90deg;
+            --four-x:180deg;
+            --nine-x: -90deg;
+            --ten-y: 90deg;
+            --thirteen-x: 90deg;
+            --fourteen-y: 90deg;
+            --fifteen-x: -90deg;
+        }
+
+        &:nth-child(26) {
+            --six-z: 90deg;
+            --nine-y: 90deg;
+            --twelve-z: 90deg;
+            --thirteen-y: -90deg;
+        }
+
+        &:nth-child(27) {
+            --six-z: 90deg;
+            --nine-y: 90deg;
+            --twelve-z: 90deg;
+            --thirteen-y: -90deg;
+        }
+    }
+}
+@keyframes steps {
+    0%{
         --rx: var(--start-x, 0deg);
         --ry: var(--start-y, 0deg);
         --rz: var(--start-z, 0deg);
     }
-    to{
-        --rx: var(--end-x, 0deg);
-        --ry: var(--end-y, 0deg);
-        --rz: var(--end-z, 0deg);
-    }
-} */
+    /* stap 1 */
+    6.25%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
 
-@keyframes step1 {
-    from{
-        --rz: 0deg;
+        --rx1: var(--one-x, 0deg);
+        --ry1: var(--one-y, 0deg);
+        --rz1: var(--one-z, 0deg);
     }
-    to{
-        --rz: 90deg;
+    /* stap 2 */
+    12.5%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+    }
+    /* stap 3 */
+    18.75%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+    }
+    /* stap 4 */
+    25%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+    }
+    /* stap 5 */
+    31.25%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+    }
+    /* stap 6 */
+    37.5%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+    }
+    /* stap 7 */
+    43.75%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+    }
+    /* stap 8 */
+    50%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+    }
+    /* stap 9 */
+    56.25%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+    }
+    /* stap 10 */
+    62.5%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+    }
+    /* stap 11 */
+    68.75%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+    }
+    /* stap 12 */
+    75%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+    }
+    /* stap 13 */
+    81.25%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+        --rx14:0deg; --ry14:0deg; --rz14:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+
+        --rx13: var(--thirteen-x, 0deg);
+        --ry13: var(--thirteen-y, 0deg);
+        --rz13: var(--thirteen-z, 0deg);
+    }
+    /* stap 14 */
+    87.5%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+        --rx14:0deg; --ry14:0deg; --rz14:0deg;
+        --rx15:0deg; --ry15:0deg; --rz15:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+
+        --rx13: var(--thirteen-x, 0deg);
+        --ry13: var(--thirteen-y, 0deg);
+        --rz13: var(--thirteen-z, 0deg);
+
+        --rx14: var(--fourteen-x, 0deg);
+        --ry14: var(--fourteen-y, 0deg);
+        --rz14: var(--fourteen-z, 0deg);
+    }
+    /* stap 15 */
+    93.75%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+        --rx14:0deg; --ry14:0deg; --rz14:0deg;
+        --rx15:0deg; --ry15:0deg; --rz15:0deg;
+        --rx16:0deg; --ry16:0deg; --rz16:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+
+        --rx13: var(--thirteen-x, 0deg);
+        --ry13: var(--thirteen-y, 0deg);
+        --rz13: var(--thirteen-z, 0deg);
+
+        --rx14: var(--fourteen-x, 0deg);
+        --ry14: var(--fourteen-y, 0deg);
+        --rz14: var(--fourteen-z, 0deg);
+
+        --rx15: var(--fifteen-x, 0deg);
+        --ry15: var(--fifteen-y, 0deg);
+        --rz15: var(--fifteen-z, 0deg);
+    }
+    /* stap 16 */
+    100%{
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+        --rx14:0deg; --ry14:0deg; --rz14:0deg;
+        --rx15:0deg; --ry15:0deg; --rz15:0deg;
+        --rx16:0deg; --ry16:0deg; --rz16:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+
+        --rx13: var(--thirteen-x, 0deg);
+        --ry13: var(--thirteen-y, 0deg);
+        --rz13: var(--thirteen-z, 0deg);
+
+        --rx14: var(--fourteen-x, 0deg);
+        --ry14: var(--fourteen-y, 0deg);
+        --rz14: var(--fourteen-z, 0deg);
+
+        --rx15: var(--fifteen-x, 0deg);
+        --ry15: var(--fifteen-y, 0deg);
+        --rz15: var(--fifteen-z, 0deg);
+
+        --rx16: var(--sixteen-x, 0deg);
+        --ry16: var(--sixteen-y, 0deg);
+        --rz16: var(--sixteen-z, 0deg);
     }
 }
-
-@keyframes step1and2 {
-    0% {
-     --rz: 0deg;   --rx: 0deg; 
-    }
-    50% { 
-        --rz: 90deg;  --rx: 0deg; 
-    }
-    100% {
-        --rz: 90deg;  --rx: 90deg; 
-    }
-}
-
-@keyframes step2 {
-    0% {
-     --rz: 0deg;   --rx: 0deg; 
-    }
-    50% { 
-        --rz: 0deg;  --rx: 0deg; 
-    }
-    100% {
-        --rz: 0deg;  --rx: 90deg; 
-    }
-}
-
-/* transformer mode in style query */
-/* if is een style query voor maar 1 property. bijv voor light dark mode, maar dan iets anders dan kleur */
-/* leuke typografie */
-/* gezichtje kan wel geanimeerd met background image @property */
