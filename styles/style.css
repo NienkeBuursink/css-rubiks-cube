@@ -66,8 +66,8 @@ rubiks{
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform-style */
     transform-style: preserve-3d;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/transform-function/rotate3d */
-    transform: rotate3d(10, 10, 1, -40deg);
-    /* animation: rotate-cube 10s linear infinite; */
+    /* transform: rotate3d(10, 10, 1, -40deg); */
+    animation: rotate-cube 10s linear infinite;
     cube {
         display: grid;
         grid-area: 1/1;
@@ -201,6 +201,10 @@ cube{
         rotateY(var(--ry15, 0deg))
         rotateZ(var(--rz15, 0deg))
 
+        rotateX(var(--rx16, 0deg))
+        rotateY(var(--ry16, 0deg))
+        rotateZ(var(--rz16, 0deg))
+
         translateX(var(--tx, 0))
         translateY(var(--ty, 0))
         translateZ(var(--tz, 0));
@@ -329,12 +333,12 @@ cube{
 /* MARK: Themes
 /* ///////////// */
 :root:has([name="transparent-mode"]:checked){
-    --color-1: rgba(255, 0, 0, 0.5);
-    --color-2: rgba(255, 166, 0, 0.5);
-    --color-3: rgba(0, 128, 0, 0.5);
-    --color-4: rgba(0, 0, 255, 0.5);
-    --color-5: rgba(255, 255, 255, 0.5);
-    --color-6: rgba(255, 255, 0, 0.5);
+    --color-1: rgba(255, 0, 0, 0.3);
+    --color-2: rgba(255, 166, 0, 0.3);
+    --color-3: rgba(0, 128, 0, 0.3);
+    --color-4: rgba(0, 0, 255, 0.3);
+    --color-5: rgba(255, 255, 255, 0.3);
+    --color-6: rgba(255, 255, 0, 0.3);
     --border: transparent;
 }
 
@@ -343,10 +347,25 @@ cube{
 }
 
 @container style(--theme: transformer){
+    rubiks:hover{
+        animation: transformer-ded 3s linear forwards;
+    }
     cube{
         /* hoofd */
         &:nth-child(11){
             --ty: calc(var(--size)*-2);
+            position: relative;
+            &::after{
+                position: absolute;
+                content: "🧠";
+                place-self: center;
+                scale: 3;
+            }
+            side:nth-child(5){
+                background-image: url(/assets/images/roblox-face.webp);
+                background-position: center;
+                background-size: contain;
+            }
         }
         /* rechterbeen */
         &:nth-child(1){
@@ -372,6 +391,24 @@ cube{
         }
         &:nth-child(9){
             --ty: calc(var(--size)*3);
+        }
+
+        /* midden */
+        &:nth-child(14){
+            position: relative;
+            &::before{
+                position: absolute;
+                content: "❤️";
+                place-self: center;
+                scale: 2;
+                transform: translateZ(calc(var(--size)/2));
+            }
+            &::after{
+                position: absolute;
+                content: "🫁";
+                place-self: center;
+                scale: 5;
+            }
         }
 
         /* rechterrarm */
@@ -664,6 +701,23 @@ cube{
   initial-value: 0deg;
 }
 @property --rz15 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+
+@property --rx16 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --ry16 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --rz16 {
   syntax: "<angle>";
   inherits: false;
   initial-value: 0deg;
@@ -974,6 +1028,7 @@ rubiks:hover{
             --eight-x: -90deg;
             --eleven-z: 90deg;
             --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(2) {
@@ -983,6 +1038,7 @@ rubiks:hover{
             --seven-z: 90deg;
             --eleven-z: 90deg;
             --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(3) {
@@ -996,6 +1052,7 @@ rubiks:hover{
             --thirteen-x: -90deg;
             --fourteen-y: -90deg;
             --fifteen-x: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(4) {
@@ -1006,6 +1063,7 @@ rubiks:hover{
             --eight-x: -90deg;
             --eleven-z: 90deg;
             --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(5) {
@@ -1021,6 +1079,7 @@ rubiks:hover{
             --eight-z: 90deg;
             --twelve-z: -90deg;
             --fourteen-x: 90deg;
+            --sixteen-x: 180deg;
         }
 
         &:nth-child(7) {
@@ -1034,6 +1093,7 @@ rubiks:hover{
             --eleven-x: -90deg;
             --twelve-y: -90deg;
             --fourteen-z: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(8) {
@@ -1056,6 +1116,7 @@ rubiks:hover{
             --eleven-z: 90deg;
             --twelve-x: -90deg;
             --fifteen-x: 90deg;
+            --sixteen-z: 180deg;
         }
 
         &:nth-child(10) {
@@ -1091,6 +1152,7 @@ rubiks:hover{
             --seven-x: 90deg;
             --eleven-x: 90deg;
             --fourteen-x: 90deg;
+            --sixteen-x: 180deg;
         }
 
         &:nth-child(16) {
@@ -1112,6 +1174,7 @@ rubiks:hover{
             --eleven-x: 90deg;
             --twelve-y: -90deg;
             --fifteen-y: 90deg;
+            --sixteen-x: 180deg;
         }
 
         &:nth-child(19) {
@@ -1846,14 +1909,87 @@ rubiks:hover{
         --ry15: var(--fifteen-y, 0deg);
         --rz15: var(--fifteen-z, 0deg);
     }
+    /* stap 16 */
     100%{
-        --rx: var(--end-x, 0deg);
-        --ry: var(--end-y, 0deg);
-        --rz: var(--end-z, 0deg);
+        --rx1:0deg; --ry1:0deg; --rz1:0deg;
+        --rx2:0deg; --ry2:0deg; --rz2:0deg;
+        --rx3:0deg; --ry3:0deg; --rz3:0deg;
+        --rx4:0deg; --ry4:0deg; --rz4:0deg;
+        --rx5:0deg; --ry5:0deg; --rz5:0deg;
+        --rx6:0deg; --ry6:0deg; --rz6:0deg;
+        --rx7:0deg; --ry7:0deg; --rz7:0deg;
+        --rx8:0deg; --ry8:0deg; --rz8:0deg;
+        --rx9:0deg; --ry9:0deg; --rz9:0deg;
+        --rx10:0deg; --ry10:0deg; --rz10:0deg;
+        --rx11:0deg; --ry11:0deg; --rz11:0deg;
+        --rx12:0deg; --ry12:0deg; --rz12:0deg;
+        --rx13:0deg; --ry13:0deg; --rz13:0deg;
+        --rx14:0deg; --ry14:0deg; --rz14:0deg;
+        --rx15:0deg; --ry15:0deg; --rz15:0deg;
+        --rx16:0deg; --ry16:0deg; --rz16:0deg;
+
+        --rx1: var(--one-x,0deg);
+        --ry1: var(--one-y,0deg);
+        --rz1: var(--one-z,0deg);
+
+        --rx2: var(--two-x,0deg);
+        --ry2: var(--two-y,0deg);
+        --rz2: var(--two-z,0deg);
+        
+        --rx3: var(--three-x, 0deg);
+        --ry3: var(--three-y, 0deg);
+        --rz3: var(--three-z, 0deg);
+
+        --rx4: var(--four-x, 0deg);
+        --ry4: var(--four-y, 0deg);
+        --rz4: var(--four-z, 0deg);
+
+        --rx5: var(--five-x, 0deg);
+        --ry5: var(--five-y, 0deg);
+        --rz5: var(--five-z, 0deg);
+
+        --rx6: var(--six-x, 0deg);
+        --ry6: var(--six-y, 0deg);
+        --rz6: var(--six-z, 0deg);
+
+        --rx7: var(--seven-x, 0deg);
+        --ry7: var(--seven-y, 0deg);
+        --rz7: var(--seven-z, 0deg);
+
+        --rx8: var(--eight-x, 0deg);
+        --ry8: var(--eight-y, 0deg);
+        --rz8: var(--eight-z, 0deg);
+
+        --rx9: var(--nine-x, 0deg);
+        --ry9: var(--nine-y, 0deg);
+        --rz9: var(--nine-z, 0deg);
+
+        --rx10: var(--ten-x, 0deg);
+        --ry10: var(--ten-y, 0deg);
+        --rz10: var(--ten-z, 0deg);
+
+        --rx11: var(--eleven-x, 0deg);
+        --ry11: var(--eleven-y, 0deg);
+        --rz11: var(--eleven-z, 0deg);
+
+        --rx12: var(--twelve-x, 0deg);
+        --ry12: var(--twelve-y, 0deg);
+        --rz12: var(--twelve-z, 0deg);
+
+        --rx13: var(--thirteen-x, 0deg);
+        --ry13: var(--thirteen-y, 0deg);
+        --rz13: var(--thirteen-z, 0deg);
+
+        --rx14: var(--fourteen-x, 0deg);
+        --ry14: var(--fourteen-y, 0deg);
+        --rz14: var(--fourteen-z, 0deg);
+
+        --rx15: var(--fifteen-x, 0deg);
+        --ry15: var(--fifteen-y, 0deg);
+        --rz15: var(--fifteen-z, 0deg);
+
+        --rx16: var(--sixteen-x, 0deg);
+        --ry16: var(--sixteen-y, 0deg);
+        --rz16: var(--sixteen-z, 0deg);
     }
 }
-
-/* transformer mode in style query */
-/* if is een style query voor maar 1 property. bijv voor light dark mode, maar dan iets anders dan kleur */
-/* leuke typografie */
-/* gezichtje kan wel geanimeerd met background image @property */
