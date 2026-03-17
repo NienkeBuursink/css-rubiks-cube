@@ -45,8 +45,6 @@ body{
         height: 100vh;
         display: grid;
         place-content: center;
-        /* isolation: isolate; */
-        
         h1{
             position: absolute;
             font-family: pixelfont, sans-serif;
@@ -57,7 +55,7 @@ body{
         scene{ /* https://css-tricks.com/things-watch-working-css-3d/ */
             transform-style: preserve-3d;
             /* mix-blend-mode: exclusion; */
-            perspective: 35em;
+            perspective: 30em;
         }
     }
 }
@@ -359,6 +357,9 @@ cube{
 :root:has([name="opposite-mode"]:checked){
     scene{
         mix-blend-mode: difference;
+        side{
+            border: none;
+        }
     }
 }
 
@@ -735,7 +736,6 @@ cube{
   inherits: false;
   initial-value: 0deg;
 }
-
 
 rubiks:hover{
     cube{
