@@ -9,12 +9,12 @@
 :root{
     --size: clamp(2rem, 8vw, 4rem);
     --gap: .5rem;
-    --color-1: red; /*rood*/
-    --color-2: orange; /*oranje*/
-    --color-3: green;  /*groen*/
-    --color-4: blue; /*blauw*/
-    --color-5: white;  /*wit*/
-    --color-6: yellow; /*geel*/
+    --color-1: red;
+    --color-2: orange;
+    --color-3: green;
+    --color-4: blue;
+    --color-5: white;
+    --color-6: yellow;
     --border: solid black;
     --background: rgb(244, 134, 200);
 }
