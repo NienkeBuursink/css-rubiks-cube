@@ -56,7 +56,7 @@ body{
         }
         scene{ /* https://css-tricks.com/things-watch-working-css-3d/ */
             transform-style: preserve-3d;
-            mix-blend-mode: difference;
+            /* mix-blend-mode: exclusion; */
             perspective: 35em;
         }
     }
@@ -354,6 +354,12 @@ cube{
 
 :root:has([name="transformer-mode"]:checked){
     --theme: transformer;
+}
+
+:root:has([name="opposite-mode"]:checked){
+    scene{
+        mix-blend-mode: difference;
+    }
 }
 
 @container style(--theme: transformer){
